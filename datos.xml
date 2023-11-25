@@ -1,0 +1,42 @@
+<Renting>
+    <Vehiculos>
+        <Vehiculo idVehiculo="1">
+            <Matricula>zzz111</Matricula>
+            <MarcaModelo>a a</MarcaModelo>
+            <AnnoFabricacion>2000</AnnoFabricacion>
+            <TarifaDia>50.00</TarifaDia>
+            <Estado>Disponible</Estado>
+        </Vehiculo>
+        <Vehiculo idVehiculo="2">
+            <Matricula>bbb222</Matricula>
+            <MarcaModelo>b b</MarcaModelo>
+            <AnnoFabricacion>2000</AnnoFabricacion>
+            <TarifaDia>50.00</TarifaDia>
+            <Estado>Alquilado</Estado>
+        </Vehiculo>
+    </Vehiculos>
+    <Alquileres>
+        <Alquiler idAlquiler="1">
+            <idVehiculo Matricula="zzz111">1</idVehiculo>
+            <dniCliente>12312312A</dniCliente>
+            <FechaIniAlq>2000-01-01</FechaIniAlq>
+            <FechaFinAlq>2000-01-02</FechaFinAlq>
+            <FechaDevolucion>2000-01-03</FechaDevolucion>
+            <KmInicial>1</KmInicial>
+            <KmFinal>2</KmFinal>
+            <PrecioFinal>80.0</PrecioFinal>
+            <Recargo>30</Recargo>
+        </Alquiler>
+        <Alquiler idAlquiler="2">
+            <idVehiculo Matricula="zzz111">1</idVehiculo>
+            <dniCliente>32132132A</dniCliente>
+            <FechaIniAlq>2000-01-06</FechaIniAlq>
+            <FechaFinAlq>2000-01-07</FechaFinAlq>
+            <FechaDevolucion />
+            <KmInicial>12</KmInicial>
+            <KmFinal />
+            <PrecioFinal />
+            <Recargo />
+        </Alquiler>
+    </Alquileres>
+</Renting>
