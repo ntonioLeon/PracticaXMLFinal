@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <Renting>
     <Vehiculos>
         <Vehiculo idVehiculo="1">
@@ -5,7 +6,7 @@
             <MarcaModelo>a a</MarcaModelo>
             <AnnoFabricacion>2000</AnnoFabricacion>
             <TarifaDia>50.00</TarifaDia>
-            <Estado>Disponible</Estado>
+            <Estado>Alquilado</Estado>
         </Vehiculo>
         <Vehiculo idVehiculo="2">
             <Matricula>bbb222</Matricula>
@@ -32,11 +33,22 @@
             <dniCliente>32132132A</dniCliente>
             <FechaIniAlq>2000-01-06</FechaIniAlq>
             <FechaFinAlq>2000-01-07</FechaFinAlq>
-            <FechaDevolucion />
+            <FechaDevolucion></FechaDevolucion>
             <KmInicial>12</KmInicial>
-            <KmFinal />
-            <PrecioFinal />
-            <Recargo />
+            <KmFinal></KmFinal>
+            <PrecioFinal></PrecioFinal>
+            <Recargo></Recargo>
+        </Alquiler>
+    <Alquiler idAlquiler="3">
+            <idVehiculo Matricula="zzz111">1</idVehiculo>
+            <dniCliente>55555555d</dniCliente>
+            <FechaIniAlq>2005-02-05</FechaIniAlq>
+            <FechaFinAlq>2006-05-31</FechaFinAlq>
+            <FechaDevolucion></FechaDevolucion>
+            <KmInicial>155</KmInicial>
+            <KmFinal></KmFinal>
+            <PrecioFinal></PrecioFinal>
+            <Recargo></Recargo>
         </Alquiler>
     </Alquileres>
 </Renting>

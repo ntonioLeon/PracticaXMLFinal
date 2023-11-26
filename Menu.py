@@ -1,5 +1,6 @@
 import CRUD_Vehiculo
 import GestorAlquileres
+
 import Utiles
 
 
@@ -191,7 +192,8 @@ def menu_modificar_vehiculo(root):
                                                  "║ Seleccione que desea modificar ║\n"
                                                  "║              ----              ║\n"
                                                  "║ 0. Cancelar modificacion       ║\n"
-                                                 "╠════════════════════════════════╣")
+                                                 "╠════════════════════════════════╣\n"
+                                                 "║ Introduzca una opcion: ")
                     if modificacion == "0":
 
                         renuncia = True
@@ -506,7 +508,7 @@ def menu_alta_vehiculo(root):
                 mostrar_nuevo_vehicle(vehicle)
                 if si_no("║ Desea agregar un nuevo vehiculo║\n║ con estas caracteristicas?     ║"):
                     CRUD_Vehiculo.crear_vehiculo(vehicle, root)
-                    print("║ Nuevo coche agrgado.           ║")
+                    print("║ Nuevo coche agregado.          ║")
                     print("╚════════════════════════════════╝")
                     retorno = True
                 else:
@@ -550,9 +552,10 @@ def menu_buscar_vehiculo(root):
                     else:
                         print("║ Volviendo al Menu Vehiculo     ║")
                         print("╚════════════════════════════════╝")
+                        renuncia = True
                 else:
                     print("║ Fallo al encontrar Vehiculo    ║")
-                    print("║ Slaiendo del menu              ║")
+                    print("║ Saliendo del menu              ║")
                     renuncia = True
             else:
                 if errores == 2:
@@ -630,7 +633,7 @@ def menu_mostrar_vehiculo(root):
 
 def menu_vehiculo(root):
     """
-    Se trata de un meno que gestiona los metodos de CRUD de vehiculos
+    Se trata de un meno que gestiona los metodos de CRUD de alquileres
     :return: None
     """
     retroceso= False
@@ -661,6 +664,26 @@ def menu_vehiculo(root):
             menu_mostrar_vehiculo(root)
 
 
+def menu_alta_alquiler(root):
+    GestorAlquileres.crear_alquiler(root)
+
+
+def menu_buscar_alquiler(root):
+    GestorAlquileres.menu_busqueda(root)
+
+
+def menu_modificar_alquiler(root):
+    GestorAlquileres.modificar_alquiler(root)
+
+
+def menu_baja_alquiler(root):
+    GestorAlquileres.finalizar_alquiler(root)
+
+
+def menu_mostrar_alquiler(root):
+    GestorAlquileres.mostrar_todos_alquileres(root)
+
+
 def menu_alquiler(root):
     """
     Se trata de un meno que gestiona los metodos de CRUD de vehiculos
@@ -675,23 +698,23 @@ def menu_alquiler(root):
             retroceso= True
 
         elif respuesta=="1":
-            menu_alta_vehiculo(root)
+            menu_alta_alquiler(root)
 
 
         elif respuesta == "2":
-            menu_buscar_vehiculo(root)
+            menu_buscar_alquiler(root)
 
 
         elif respuesta == "3":
-            menu_modificar_vehiculo(root)
+            menu_modificar_alquiler(root)
 
 
         elif respuesta == "4":
-            menu_eliminar_vehiculo(root)
+            menu_baja_alquiler(root)
 
 
         elif respuesta == "5":
-            menu_mostrar_vehiculo(root)
+            menu_mostrar_alquiler(root)
 
 
 def menu_principal(root):
@@ -747,13 +770,13 @@ def menu_basico():
 
 
 
-root = CRUD_Vehiculo.cargar_arbol_xml()
+#root = CRUD_Vehiculo.cargar_arbol_xml()
 #GestorAlquileres.finalizar_alquiler(root)
-GestorAlquileres.modificar_alquiler(root)
+#GestorAlquileres.modificar_alquiler(root)
 #menu_alta_vehiculo(root)
 #menu_modificar_vehiculo(root)
 #menu_buscar_vehiculo(root)
 #menu_eliminar_vehiculo(root)
 #menu_mostrar_vehiculo(root)
 #GestorAlquileres.crear_alquiler(root)
-menu_principal(root)
+#menu_principal(root)

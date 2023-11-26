@@ -1,7 +1,9 @@
 import Utiles
+import CRUD_Vehiculo
+import Menu
 
 print("Inicio proyecto")
-
-Utiles.menu_basico()
+root = CRUD_Vehiculo.cargar_arbol_xml()
+Menu.menu_principal(root)
 
 print("Fin proyecto")

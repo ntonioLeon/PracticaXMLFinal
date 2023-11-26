@@ -7,7 +7,24 @@ import Utiles
 
 file_path = ".\\datos.xml"
 
-
+def si_no(cadena):
+    """
+    funcion que sirve como comprobante para las preguntas al usuario.
+    @:param cadena que se printeara junto a la pregunta.
+    """
+    print(cadena)
+    while True:
+        print("╠════════════════════════════════╣")
+        print("║ 1. SI                          ║")
+        print("║ 2. NO                          ║")
+        print("╠════════════════════════════════╣")
+        respuesta = input("║  Introduzca una opcion valida:")
+        print("╠════════════════════════════════╣")
+        if respuesta == "1":
+            return True
+        elif respuesta == '2':
+            return False
+        print(cadena)
 def prettify(elem, level=0):
     """
     funcion que reescribe el xml para que no este en una linea y tenga una estructura valida.
@@ -176,23 +193,30 @@ def crear_alquiler(root):
     @:param root, para ser recorrido y trabajado
     """
     done = False
-    print("Creacion de alquileres")
+    print("╔════════════════════════════════╗")
+    print("║      Menu Alta Alquileres      ║")
+    print("╠════════════════════════════════╣")
     while not done:  # Bucle que servira para realizar mas de un alquiler
         # En estas lineas nos apoyaremos en los functions de Validador para conseguir campos correctos
         mat = Validador.validar_y_comprobar_matricula(root)
         if mat is not None:
             id_del_vehiculo = id_por_mat(root, mat)  # En estas lineas nos apoyaremos en los funcions de Validador para conseguir campos correctos
             if not esta_dispinible(root, id_del_vehiculo):
-                print("El vehiculo no esta disponible para ser alquilado")
+                print("╠════════════════════════════════╣")
+                print("║      Vehiculo no disponible    ║")
+                print("╠════════════════════════════════╣")
                 id_del_vehiculo = None
                 mat = None
         if mat is not None:
             dni_del_cliente = Validador.validar_dni()
         if mat is not None and dni_del_cliente is not None:
-            print("Fecha de inicio:")
+            print("║ Fecha de Inicio                ║")
+            print("║                                ║")
             fecha_del_ini = Validador.validar_fecha()
         if mat is not None and dni_del_cliente is not None and fecha_del_ini is not None:
-            print("Fecha de fin:")
+            print("║ Fecha de Finalizacion          ║")
+            print("║                                ║")
+
             fecha_del_fin = Validador.validar_fecha(fecha_del_ini)
         if mat is not None and dni_del_cliente is not None and fecha_del_ini is not None and fecha_del_fin is not None:
             km_del_ini = Validador.validar_kilometraje()
@@ -201,7 +225,7 @@ def crear_alquiler(root):
 
             alquileres = root.find("Alquileres")  # Nos situamos en alquileres
             if alquileres is None:  # Si no exsie los creamos
-                print("Fallo al encontrar Alquileres")
+                print("║ Fallo al encontrar \"Alquileres\"║")
                 alquileres = ET.SubElement(root, "Alquileres")
             # Creamos el alquiler con el id como atributo
             alquiler = ET.SubElement(alquileres, "Alquiler", idAlquiler=str(obtener_ultimo_id_alquiler(root)))
@@ -224,11 +248,20 @@ def crear_alquiler(root):
 
             prettify(root)  # Re hacemos la estructura del xml
             ElementTree(root).write(file_path)  # Escribimos el archivo
-
-            if not Utiles.si_no(
-                    "Desea dar de alta otro alquiler?"):  # Preguntamos si quiere hacer otro y en caso de que no salimos
+            print("║             ----               ║")
+            print("║ Nuevo Alquiler agregado.       ║")
+            print("╚════════════════════════════════╝")
+            print("╔════════════════════════════════╗")
+            if si_no("║ ¿Continuar en Menu Alta?       ║"):
+                print("║ Volviendo al Menu Alta         ║")
+                print("╚════════════════════════════════╝")  # Preguntamos si quiere hacer otro y en caso de que no salimos
                 done = True
+            else:
+                print("║ Volviendo al Menu Alquiler     ║")
+                print("╚════════════════════════════════╝")
         else:  # Si se falla en los campos te saca del menu.
+            print("║ Volviendo al Menu Alquiler     ║")
+            print("╚════════════════════════════════╝")
             done = True
 
 
@@ -254,9 +287,13 @@ def mostrar_todos_alquileres(root):
                     print()
     else:
         if alquileres is None or len(alquileres) == 0:
-            print("No hay alquileres en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
         else:
-            print("No hay vehiculos en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
 
 
 def mostrar_por_dni(root):
@@ -287,10 +324,13 @@ def mostrar_por_dni(root):
             print("El DNI introducido no se correspondia con el de nadie que hubiese realizado un alquiler")
     else:
         if alquileres is None or len(alquileres) == 0:
-            print("No hay alquileres en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
         else:
-            print("No hay vehiculos en el sistema")
-
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
 
 def mostrar_por_matricula(root):
     """
@@ -323,9 +363,13 @@ def mostrar_por_matricula(root):
             print("La matricula introducida con se corresponde con la de ningun vehiculo")
     else:
         if alquileres is None or len(alquileres) == 0:
-            print("No hay alquileres en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
         else:
-            print("No hay vehiculos en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
 
 
 # Finalizar
@@ -359,7 +403,7 @@ def finalizar(root, alquiler, id_alquiler):
     if fecha_devo is not None:  # comprobamos que los campos son validos
         km_fin = Validador.validar_kilometraje(alquiler[5].text)  # Pedimos kmfinal
     if fecha_devo is not None and km_fin is not None:  # Si los campos son correctos damos el alquiler por finalizado
-        if Utiles.si_no("Seguro que quiere finalizar este alquiler? Esto lo hara inmodificable."):
+        if Utiles.si_no("║Seguro que quiere finalizar este║\n║ alquiler? Esto lo hara inmodificable.║"):
             alquiler[4].text = str(fecha_devo)
             alquiler[6].text = km_fin  # Escribimos los campos
             '''Linea que calcula el precio*dias por medio de restar fechas, pasarlas a dias, convertirlas a string porque 
@@ -378,9 +422,13 @@ def finalizar(root, alquiler, id_alquiler):
             prettify(root)
             ElementTree(root).write(file_path)  # Re escribimos el xml
 
-        print("Alquiler finalizado")
+        print("║ Alquiler Finalizado            ║")
+        print("║                                ║")
+        print("╚════════════════════════════════╝")
     else:
-        print("Volviendo al menu de finalizacion.")
+        print("║ Volviendo Menu Finalizacion    ║")
+        print("║                                ║")
+        print("╚════════════════════════════════╝")
 
 
 def conseguir_id_por_matricula(root, matricula):
@@ -424,18 +472,26 @@ def finalizar_alquiler(root):
                         if not esta_finalizado(i, id_alquiler):  # Comprobamos si ya esta finalizado
                             finalizar(root, i, id_alquiler)  # Si no lo esta lo mandamos finalizar.
                         else:
-                            print("El alquiler que desea finalizar ya fue finalizado anteriormente.")
+                            print("║ El alquiler que desea finalizar║")
+                            print("║ ya fue finalizado anteriormente║")
                 if not esta:
-                    print("El id introducido no coincide con el de ningun alquiler")
+                    print("║ El id introducido no coincide  ║")
+                    print("║ con el de ningun alquiler      ║")
             else:
-                print("No hay alquileres en el sistema")
-            if not Utiles.si_no("Quiere tratar de finalizar otro alquiler?"):
+                print("║ No hay alquileres registrados  ║")
+                print("║                                ║")
+                print("╚════════════════════════════════╝")
+            if not Utiles.si_no("║Quiere tratar de finalizar otro ║\n║alquiler?                       ║"):
                 done = True
     else:
         if alquileres is None or len(alquileres) == 0:
-            print("No hay alquileres en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
         else:
-            print("No hay vehiculos en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
 
 
 def modificar(root, alq):
@@ -447,76 +503,123 @@ def modificar(root, alq):
     elec = ""
     while elec != "0":
         print("----MENU DE MODIFICACION----")
-        print("1. Matricula\n3. Fecha de inicio\n4. fecha de finalizacion\n5. Kilometraje inicial\n0. Salir")
-        elec = input("Elija el campo que desea modificar (1/2/3/4/0):\n")
+        print("╔════════════════════════════════╗")
+        print("║  Menu Modificacion Alquileres  ║")
+        print("╠════════════════════════════════╣")
+        print("║ 1. Matricula                   ║")
+        print("║ 2. DNI                         ║")
+        print("║ 3. Fecha de inicio             ║")
+        print("║ 4. Fecha de finalizacion       ║")
+        print("║ 5. Kilometraje inicial         ║")
+        print("║              ----              ║")
+        print("║ Seleccione que desea modificar ║")
+        print("║              ----              ║")
+        print("║ 0. Volver al Menu Alquileres   ║")
+        print("╚════════════════════════════════╝")
+        elec = input("║ Elija una opcion valida: ")
         if elec == "1": #Matricula
-            print("Modificacion de matricula.")
+            print("╔════════════════════════════════╗")
+            print("║ Modificacion de matricula      ║")
+            print("║                                ║")
             mat = Validador.validar_y_comprobar_matricula(root)
             if mat is not None: #Comprobamos que la matricula sea correcta
                 id_vehiculo = id_por_mat(root, mat) #Obtenemos el id
                 print(mat, id_vehiculo)
                 if esta_dispinible(root, id_vehiculo): #Vemos si esta disponible el posible nuevo vehiculo
-                    if Utiles.si_no("Seguro que desea sustituir la matricula "+ alq[0].attrib["Matricula"] +" por "+ mat +"?"): #Si lo esta y confirma
+                    if Utiles.si_no("║ Desea modificar la matricula:  ║\n║ "+ alq[0].attrib["Matricula"] + " por " + mat + "?║"): #Si lo esta y confirma
                         alq[0].text = id_vehiculo #Realizamos los cambios
                         alq[0].attrib["Matricula"] = mat
-                        print("Matricula modificada con existo")
+                        print("║ Matricula modificada con exito ║")
+                        print("╚════════════════════════════════╝")
                     else:
-                        print("Modificacion cancelada.")
+                        print("║ Modificacion cancelada         ║")
+                        print("╚════════════════════════════════╝")
                 else:
-                    print("El vehiculo por el que desea modificar la matricula no esta disponible actualmente.")
+                    print("║ La matricula no puede ser      ║")
+                    print("║ modificada en este momento     ║")
+                    print("╚════════════════════════════════╝")
         elif elec == "2": #DNI
-            print("Modificacion de DNI.")
+            print("╔════════════════════════════════╗")
+            print("║ Modificacion de DNI            ║")
+            print("║                                ║")
             dni = Validador.validar_dni()
             if dni is not None: #Valodamos campos
-                if Utiles.si_no("Seguro que desea modificar el dni del cliente por " + dni + "?"): #Pedimos confirmacion
+
+                if Utiles.si_no("║ Modificar el DNI del cliente   ║\n║ por " + dni + "?║"): #Pedimos confirmacion
                     alq[1].text = dni #Aplicamos
-                    print("DNI modificado con existo")
+                    print("║ DNI modificado con exito       ║")
+                    print("╚════════════════════════════════╝")
                 else:
-                    print("Modificacion cancelada.")
+                    print("║ Modificacion cancelada         ║")
+                    print("╚════════════════════════════════╝")
         elif elec == "3": #fecha inicio
-            print("Modificacion de la fecha inicial: Si esta sobrepasa la fecha final estimada esta tambien pedirá modificada.")
+            print("╔════════════════════════════════╗")
+            print("║ Modificacion de matricula      ║")
+            print("║                                ║")
+            print("║ Si fecha inicial es posterior  ║")
+            print("║ a la fecha final, tambien      ║")
+            print("║ cambiara la fecha final        ║")
+            print("║                                ║")
             fecha_ini = Validador.validar_fecha()
             if fecha_ini is not None: #Comprobamos que el cmapo es correcto
                 campos_fin = alq[3].text.split("-")
                 fecha_fin = datetime.date(int(campos_fin[0]),int(campos_fin[1]),int(campos_fin[2]))
                 if fecha_ini > fecha_fin: #Comprobamos que no es posterior a la antigua fecha de fin
-                    print("La nueva fecha de inicio sobrepasa la antigua fecha de fin estimada. Modifique la fecha de fin.") #Notificamos
+                    print("║ La nueva fecha de inicio       ║")
+                    print("║ sobrepasa la antigua fecha de  ║")
+                    print("║ fin estimada. Modifique la     ║")
+                    print("║ fecha de fin                   ║")#Notificamos
                     nueva_fecha_fin = Validador.validar_fecha(fecha_ini)
                     if nueva_fecha_fin is not None:  #Comprobamos la nueva fecha fin
-                        if Utiles.si_no("Seguro que desea cambiar la fecha inicial de "+ alq[2].text +" a "+ str(fecha_ini) +" y la fecha final por "+ str(nueva_fecha_fin) +"?"): #Confirmacion
+                        if Utiles.si_no("║ Seguro que desea cambiar la    ║\n║ fecha inicial de "+ alq[2].text +" a "+ str(fecha_ini) +" y la fecha final por "+ str(nueva_fecha_fin) + "?║"): #Confirmacion
                             alq[2].text = str(fecha_ini) #Aplicar cambios
                             alq[3].text = str(nueva_fecha_fin)
-                            print("Fecha inicial y final modificada")
+                            print("║ Fechas modificadas con exito   ║")
+                            print("╚════════════════════════════════╝")
                         else:
-                            print("Fecha inicial modificada")
+                            print("║ Fecha modificada  con exito    ║")
+                            print("╚════════════════════════════════╝")
                 else: #Si no se pasa
-                    if Utiles.si_no("Seguro que desea cambiar la fecha inicial de "+ alq[2].text +" a "+ str(fecha_ini) +"?"):
+
+                    if Utiles.si_no("║ Seguro que desea cambiar la    ║\n║ fecha inicial de "+ alq[2].text +" a "+ str(fecha_ini) +"?║"):
                         alq[2].text = str(fecha_ini) #Aplicar cambios
-                        print("Fecha inicial modificada")
+                        print("║ Fecha modificada  con exito    ║")
+                        print("╚════════════════════════════════╝")
                     else:
-                        print("Modificacion cancelada.")
+                        print("║ Modificacion cancelada         ║")
+                        print("╚════════════════════════════════╝")
         elif elec == "4": #fecha fin
-            print("Modificacion de la fecha final.")
+            print("╔════════════════════════════════╗")
+            print("║ Modificacion de la fecha final ║")
+            print("║                                ║")
             campos_ini = alq[2].text.split("-")
             fecha_ini = datetime.date(int(campos_ini[0]),int(campos_ini[1]),int(campos_ini[2]))
             fecha_fin = Validador.validar_fecha(fecha_ini)
-            if fecha_fin is not None: #Comprobamos que el nuevo campo es correco
-                if Utiles.si_no("Seguro que desea cambiar la fecha de fin de alquiler por "+ str(fecha_fin) +"?"):
+            if fecha_fin is not None: #Comprobamos que el nuevo campo es correcto
+                if Utiles.si_no("║ Seguro que desea cambiar la    ║\n║ fecha de fin de alquiler por "+ str(fecha_fin) +"?║"):
                     alq[3].text = str(fecha_fin) #Ejecutamos cambio
-                    print("Fecha final modificada")
+                    print("║ Fecha modificada  con exito    ║")
+                    print("╚════════════════════════════════╝")
                 else:
-                    print("Modificacion cancelada.")
+                    print("║ Modificacion cancelada         ║")
+                    print("╚════════════════════════════════╝")
         elif elec == "5": #Km inicial
-            print("Modificacion del kilometraje inicial.") #Pedimos el campo
+            print("╔════════════════════════════════╗")
+            print("║ Modificacion del km inicial    ║")
+            print("║                                ║") #Pedimos el campo
             km_ini = Validador.validar_kilometraje()
             if km_ini is not None: #Comprobamos
-                if Utiles.si_no("Seguro que desea cambiar el kilometraje inicial por "+ km_ini +"?"): #Pedimos confirmacion
+                if Utiles.si_no("║ Seguro que desea cambiar el    ║\n║ kilometraje inicial por "+ km_ini +"?"): #Pedimos confirmacion
                     alq[5].text = km_ini #Ejecutamos cambio
-                    print("Kilometraje inicial modificado")
+                    print("║ Kilometraje inicial modificado ║")
+                    print("╚════════════════════════════════╝")
                 else:
-                    print("Modificacion cancelada.")
+                    print("║ Modificacion cancelada         ║")
+                    print("╚════════════════════════════════╝")
         else:
-            print("Eleccion no valida.")
+            print("║ Eleccion no valida             ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
         prettify(root)
         ElementTree(root).write(file_path)  # Re escribimos el xml
 
@@ -526,13 +629,15 @@ def modificar_alquiler(root):
     Funcion que encuentra el alquiler a modificar y los manda a la funcion de modificacion
     :param root: que se recorrera en busca del alquiler
     """
+    print("╠════════════════════════════════╣")
     alquileres = root.find("Alquileres")  # Encontramos los alquileres
     vehiculos = root.find("Vehiculos")  # Encontramos los Vehiculos
     if alquileres is not None and len(alquileres) > 0 and vehiculos is not None and len(vehiculos) > 0:
         done = False
         esta = False
         while not done:  # Para finalizar mas de uno si se quiere
-            print("Modificacion de Alquiler.. Recuerde que solo puede modificar alquileres sin finalizar.")
+            print("║ Recuerde, solo puede modificar ║")
+            print("║ alquileres sin finalizar.      ║")
             matricula = Validador.validar_y_comprobar_matricula(root)  # pedimos la matricula
             if matricula is not None: #Si es correcta
                 id_alquiler = conseguir_id_por_matricula(root, matricula) #Conseguimos el id
@@ -541,21 +646,28 @@ def modificar_alquiler(root):
                     if alq[0].attrib["Matricula"] == matricula and not esta_finalizado(alq, id_alquiler): #Si el alquiler existe y no esta finalizado lo mandamos a modificar.
                         modificar(root, alq)
                     else:
-                        print("La matricula que usted introduce no tiene ningun alquiler abierto que modificar.")
-            if not Utiles.si_no("Quiere modificar otro alquiler?"):
+                        print("║ La matricula introducida no    ║")
+                        print("║ corresponde con ningun alquiler║")
+                        print("║ sin finalizar, por ello no es  ║")
+                        print("║ modicable                      ║")
+            if not Utiles.si_no("║ Quiere modificar otro alquiler?║"):
                 done = True
     else:
         if alquileres is None or len(alquileres) == 0:
-            print("No hay alquileres en el sistema")
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
         else:
-            print("No hay vehiculos en el sistema")
-
+            print("║ No hay alquileres registrados  ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
+"""
 
 def menu_alquiler(root):
-    """
+
     funcion que actua como un menu y dispara los funcions
     @:param root que se manda por los funcions
-    """
+
     choice = ""
     while choice != "0":
         print("\nMenu de Alquileres:")
@@ -577,8 +689,9 @@ def menu_alquiler(root):
             finalizar_alquiler(root)
         elif choice == "0":
             print("Saliendo del menu de alquileres")
+            
         else:
-            print("Opcion no valida.")
+            print("Opcion no valida.")"""
 
 
 def menu_busqueda(root):
@@ -588,13 +701,17 @@ def menu_busqueda(root):
     """
     choice = ""
     while choice != "0":
-        print("\nMenu de Alquileres:")
-        print("1. Mostrar todos los alquileres")
-        print("2. Buscar todos los alquileres de una matricula")
-        print("3. Buscar todos los alquileres de un cliente (DNI)")
-        print("0. Volver al menu de alquileres")
-
-        choice = input("Selecciona una opcion (1/2/3/0): ")
+        print("╔════════════════════════════════╗")
+        print("║    Menu Busqueda Alquileres    ║")
+        print("╠════════════════════════════════╣")
+        print("║ 1. Mostrar todos los alquileres║")
+        print("║ 2. Alquileres por matriculas   ║")
+        print("║ 3. Alquileres por cliente      ║")
+        print("║              ----              ║")
+        print("║ 0. Volver al Menu Alquileres   ║")
+        print("╚════════════════════════════════╝")
+        print("╔════════════════════════════════╗")
+        choice = input("║ Seleccione una opcion valida: ")
         if choice == "1":
             mostrar_todos_alquileres(root)
         elif choice == "2":
@@ -602,6 +719,10 @@ def menu_busqueda(root):
         elif choice == "3":
             mostrar_por_dni(root)
         elif choice == "0":
-            print("Saliendo del menu de busqueda.")
+            print("║ Volviendo a Menu Alquileres    ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
         else:
-            print("Opcion no valida.")
+            print("║ Opcion no valida               ║")
+            print("║                                ║")
+            print("╚════════════════════════════════╝")
