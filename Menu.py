@@ -216,7 +216,7 @@ def menu_modificar_vehiculo(root):
                         print("║ Matricula antigua: " + vehicle['Matricula'] + "      ║")
                         while not exito:
                             matricula = input("║ Matricula, formato AAA000: ")
-                            if matricula is not None and not CRUD_Vehiculo.matricula_en_uso(matricula, root) and CRUD_Vehiculo.verificar_matricula(matricula):
+                            if matricula is not None and not CRUD_Vehiculo.matricula_en_uso(matricula, root) and CRUD_Vehiculo.verificar_matricula(matricula) and len(matricula.strip()) > 0:
                                 print("║ Matricula introducida con exito║")
                                 vehiculo = {'Matricula': matricula.upper(), 'MarcaModelo': vehicle['MarcaModelo'], 'AnnoFabricacion': vehicle['AnnoFabricacion'],
                                            'TarifaDia': vehicle['TarifaDia'], 'Estado': vehicle['Estado']}
@@ -238,7 +238,7 @@ def menu_modificar_vehiculo(root):
                             elif not CRUD_Vehiculo.verificar_matricula(matricula):
                                 print("║ Formato de matricula no valido ║")
                                 fallos = fails(fallos, "Alta")
-                            elif CRUD_Vehiculo.matricula_en_uso(matricula, root):
+                            else:
                                 print("║ No introduzca cadenas vacias   ║")
                                 fallos = fails(fallos, "Alta")
                             if fallos == 3:
@@ -254,7 +254,7 @@ def menu_modificar_vehiculo(root):
                         print("║ Marca/Modelo antigua: " + vehicle['MarcaModelo'])
                         while not exito:
                             marca = input("║ Introduzca la nueva Marca/Modelo : ")
-                            if marca is not None:
+                            if marca is not None and len(marca.strip()) > 0:
                                 print("║ Marca introducida con exito    ║")
                                 vehiculo = {'Matricula': vehicle['Matricula'], 'MarcaModelo': marca,
                                             'AnnoFabricacion': vehicle['AnnoFabricacion'],
@@ -271,7 +271,7 @@ def menu_modificar_vehiculo(root):
                                     print("╚════════════════════════════════╝")
                                     exito = True
 
-                            elif marca is None:
+                            else:
                                 print("║ No introduzca cadenas vacias   ║")
                                 fallos = fails(fallos, "Alta")
 
@@ -290,7 +290,7 @@ def menu_modificar_vehiculo(root):
                         while not exito:
                             print("║ Fecha, recuerde entre 1970-2023║")
                             anno = input("║ Fecha de fabricacion: ")
-                            if anno is not None:
+                            if anno is not None and len(anno.strip()) > 0:
                                 if anno.isnumeric():
                                     anno = int(anno)
                                     if 1970 <= anno <= 2023:
@@ -337,7 +337,7 @@ def menu_modificar_vehiculo(root):
                                 print("║ nuestros modelos abarcan       ║")
                                 tarifa = input("║ entre 50 y 250€ al dia: ")
                                 tarifa = CRUD_Vehiculo.isdecima(tarifa)
-                                if tarifa is not None:
+                                if tarifa is not None and len(tarifa.strip()) > 0:
                                     print("║ Tarifa introducida con exito   ║")
                                     vehiculo = {'Matricula': vehicle['Matricula'], 'MarcaModelo': vehicle['MarcaModelo'],
                                                 'AnnoFabricacion': vehicle['AnnoFabricacion'],
@@ -432,10 +432,10 @@ def menu_alta_vehiculo(root):
             exito = False
             while not exito:
                 marca = input("║ Marca: ")
-                if marca is not None:
+                if marca is not None and len(marca.strip()) > 0:
                     print("║ Marca introducida con exito    ║")
                     exito = True
-                elif marca is None:
+                else:
                     print("║ No introduzca cadenas vacias   ║")
                     fallos = fails(fallos, "Alta")
 
@@ -451,10 +451,10 @@ def menu_alta_vehiculo(root):
                 exito = False
                 while not exito:
                     modelo = input("║ Modelo: ")
-                    if modelo is not None:
+                    if modelo is not None and len(modelo.strip()) > 0:
                         print("║ Modelo introducida con exito   ║")
                         exito = True
-                    elif modelo is None:
+                    else:
                         print("║ No introduzca cadenas vacias   ║")
                         fallos = fails(fallos, "Alta")
 
@@ -471,7 +471,7 @@ def menu_alta_vehiculo(root):
                 while not exito:
                     print("║ Fecha, recuerde entre 1970-2023║")
                     anno = input("║ Fecha de fabricacion: ")
-                    if anno is not None:
+                    if anno is not None and len(anno.strip()) > 0:
                         if anno.isnumeric():
                             anno = int(anno)
                             if 1970 <= anno <= 2023:
@@ -483,7 +483,7 @@ def menu_alta_vehiculo(root):
                         else:
                             print("║ Introduzca una fecha valida    ║")
                             fallos = fails(fallos, "Alta")
-                    elif anno is None:
+                    else:
                         print("║ No introduzca cadenas vacias   ║")
                         fallos = fails(fallos, "Alta")
 
@@ -502,7 +502,7 @@ def menu_alta_vehiculo(root):
                     print("║ nuestros modelos abarcan       ║")
                     tarifa = input("║ entre 50 y 250€ al dia: ")
                     tarifa = CRUD_Vehiculo.isdecima(tarifa)
-                    if tarifa is not None:
+                    if tarifa is not None and len(marca.strip()) > 0:
                         print("║ Tarifa introducida con exito   ║")
                         exito = True
                     else:

@@ -13,7 +13,7 @@
             <MarcaModelo>b b</MarcaModelo>
             <AnnoFabricacion>2000</AnnoFabricacion>
             <TarifaDia>75.00</TarifaDia>
-            <Estado>Alquilado</Estado>
+            <Estado>Disponible</Estado>
         </Vehiculo>
         <Vehiculo idVehiculo="3">
             <Matricula>ccc333</Matricula>
@@ -35,16 +35,27 @@
             <PrecioFinal>260.0</PrecioFinal>
             <Recargo>60</Recargo>
         </Alquiler>
-    <Alquiler idAlquiler="2">
+        <Alquiler idAlquiler="2">
             <idVehiculo Matricula="bbb222">2</idVehiculo>
             <dniCliente>11111111a</dniCliente>
             <FechaIniAlq>2000-01-01</FechaIniAlq>
             <FechaFinAlq>2000-01-05</FechaFinAlq>
-            <FechaDevolucion></FechaDevolucion>
+            <FechaDevolucion>2000-02-28</FechaDevolucion>
             <KmInicial>1</KmInicial>
-            <KmFinal></KmFinal>
-            <PrecioFinal></PrecioFinal>
-            <Recargo></Recargo>
+            <KmFinal>99</KmFinal>
+            <PrecioFinal>5970.0</PrecioFinal>
+            <Recargo>1620</Recargo>
+        </Alquiler>
+        <Alquiler idAlquiler="3">
+            <idVehiculo Matricula="ccc333">3</idVehiculo>
+            <dniCliente>55555555l</dniCliente>
+            <FechaIniAlq>2045-03-03</FechaIniAlq>
+            <FechaFinAlq>2046-03-03</FechaFinAlq>
+            <FechaDevolucion>2046-09-09</FechaDevolucion>
+            <KmInicial>99</KmInicial>
+            <KmFinal>100</KmFinal>
+            <PrecioFinal>61200.0</PrecioFinal>
+            <Recargo>5700</Recargo>
         </Alquiler>
     </Alquileres>
 </Renting>
