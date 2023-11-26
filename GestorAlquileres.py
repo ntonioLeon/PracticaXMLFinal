@@ -401,7 +401,10 @@ def finalizar(root, alquiler, id_alquiler):
     function que finaliza los campos de un alquiler.
     @:param root que se escribira alquiler que se actualizara
     """
-    print("Introduzca la fecha de devolucion del vehiculo")
+    print("║                                ║")
+    print("║ Introduzca la fecha de         ║")
+    print("║ devolucion del vehiculo        ║")
+    print("║                                ║")
     campos = str(alquiler[2].text).split("-")  # Obtenemos la fecha inicial
     fecha_ini = datetime.date(int(campos[0]), int(campos[1]), int(campos[2]))  # Reconstruimos la fecha inicial
     campos_fin = str(alquiler[3].text).split("-")  # Obtenemos la fecha final
@@ -410,15 +413,24 @@ def finalizar(root, alquiler, id_alquiler):
     if fecha_devo is not None:  # comprobamos que los campos son validos
         km_fin = Validador.validar_kilometraje(alquiler[5].text)  # Pedimos kmfinal
     if fecha_devo is not None and km_fin is not None:  # Si los campos son correctos damos el alquiler por finalizado
+        recargo = 30 * int(str((fecha_devo - fecha_fin).days))
+        if fecha_devo > fecha_fin:
+
+            print("║                                ║")
+            print("║ Se ha producido un recargo     ║")
+            print("║ "+str(recargo)+" €"+" "*(30-len(str(recargo)))+"║")
+            print("║                                ║")
+
         if si_no("║Seguro que quiere finalizar este║\n║ alquiler? Esto lo hara inmodificable.║"):
             alquiler[4].text = str(fecha_devo)
             alquiler[6].text = km_fin  # Escribimos los campos
             '''Linea que calcula el precio*dias por medio de restar fechas, pasarlas a dias, convertirlas a string porque 
             castear de date a int explota y concluye multiplicando los dias por el precio/dia del vehiculo.'''
             if calcular_recargo(alquiler, fecha_devo):  # Comprobamos si merece recargo o no y lo aplicamos si es necesario
-                recargo = 30 * int(str((fecha_devo - fecha_fin).days))
                 alquiler[8].text = str(recargo)
                 precio = int(str((fecha_devo - fecha_ini).days)) * float(conseguir_precio_por_id(root, alquiler[0].text)) + recargo
+                print("║ El precio final del alquiler es║")
+                print("║ " + str(precio) + " €"+ " "* (28 - len(str(precio))) + " ║")
                 alquiler[7].text = str(precio)
             else:
                 alquiler[8] = "Sin recargo"
@@ -468,7 +480,9 @@ def finalizar_alquiler(root):
     vehiculos = root.find("Vehiculos")  # Encontramos los Vehiculos
     if alquileres is not None and len(alquileres) > 0 and vehiculos is not None and len(vehiculos) > 0:
         while not done:  # Para finalizar mas de uno si se quiere
-            print("Devolucion del vehiculo.")
+            print("╔════════════════════════════════╗")
+            print("║      Devolucion del vehiculo   ║")
+            print("╠════════════════════════════════╣")
             matricula = Validador.validar_y_comprobar_matricula(root)  # Pelidmos id
             id_alquiler = conseguir_id_por_matricula(root, matricula)
             alquiler = alquileres.findall("Alquiler")
@@ -482,12 +496,14 @@ def finalizar_alquiler(root):
                             print("║ El alquiler que desea finalizar║")
                             print("║ ya fue finalizado anteriormente║")
                 if not esta:
-                    print("║ El id introducido no coincide  ║")
-                    print("║ con el de ningun alquiler      ║")
+                    print("║ El vehiculo no tiene ningun    ║")
+                    print("║ alquiler                       ║")
+
             else:
                 print("║ No hay alquileres registrados  ║")
                 print("║                                ║")
                 print("╚════════════════════════════════╝")
+                print("╔════════════════════════════════╗")
             if not si_no("║Quiere tratar de finalizar otro ║\n║alquiler?                       ║"):
                 done = True
     else:
@@ -636,7 +652,8 @@ def modificar_alquiler(root):
     Funcion que encuentra el alquiler a modificar y los manda a la funcion de modificacion
     :param root: que se recorrera en busca del alquiler
     """
-    print("╠════════════════════════════════╣")
+    print("╔════════════════════════════════╗")
+    print("║  Menu modificacion Alquiler    ║")
     alquileres = root.find("Alquileres")  # Encontramos los alquileres
     vehiculos = root.find("Vehiculos")  # Encontramos los Vehiculos
     if alquileres is not None and len(alquileres) > 0 and vehiculos is not None and len(vehiculos) > 0:

@@ -15,7 +15,7 @@ def validar_dni():
                 if dni[0:8].isnumeric():  # Es cerrado por la izquierda abierto por la derecha
                     if dni[8].isalpha():  # Solo coge el noveno caracter
                         print("║ DNI introducido con exito      ║")
-                        return dni
+                        return dni.upper()
                     else:
                         cont += 1
                         print("║ Recuerde el formato: 00000000X ║")
@@ -48,9 +48,9 @@ def validar_fecha(fecha_ini=None):
     anno = ""
     mes = ""
     dia = ""
-    check = False
     fin = False
     while not fin:
+        check = False
         if fecha_ini is None:
             print("║ La fecha constará de anno,     ║")
             print("║ mes y dia.                     ║")#Mensaje diferente en base al parametro.
@@ -67,23 +67,40 @@ def validar_fecha(fecha_ini=None):
             if not anno.isspace():
                 anno = anno.strip()
                 if anno.isnumeric():
-                    if int(anno) >= 2000 and int(anno) <= 2050:
-                        print("║ Anno introducido con exito     ║")
-                        check = True
+                    if fecha_ini is None:
+                        if int(anno) >= 2000 and int(anno) <= 2050:
+                            print("║ Anno introducido con exito     ║")
+                            check = True
+                        else:
+                            cont += 1
+                            print("║ La fecha debe estar contenida  ║")
+                            print("║ estar entre el anno 2000 - 2050║")
+                            print("║ Fallo = ", cont, "                    ║")
                     else:
-                        cont += 1
-                        print("║ La fecha debe estar contenida  ║")
-                        print("║ estar entre el anno 2000 - 2050║")
-                        print("║ Fallo = ", cont, "                   ║")
+                        if int(anno) >= int(str(fecha_ini).split("-")[0]):
+                            if int(anno) >= 2000 and int(anno) <= 2050:
+                                print("║ Anno introducido con exito     ║")
+                                check = True
+                            else:
+                                cont += 1
+                                print("║ La fecha debe estar contenida  ║")
+                                print("║ estar entre el anno 2000 - 2050║")
+                                print("║ Fallo = ", cont, "                    ║")
+                        else:
+                            cont += 1
+                            print("║ La fecha debe estar contenida  ║")
+                            print("║ El anno debe ser mayor/igual   ║")
+                            print("║a la fecha de inicio: "+str(fecha_ini)+"║")
+                            print("║ Fallo = ", cont, "                    ║")
                 else:
                     cont += 1
                     print("║ El anno debe ser numerico.     ║")
-                    print("║ Fallo = ", cont, "                   ║")
+                    print("║ Fallo = ", cont, "                    ║")
             else:
                 cont += 1
                 print("║ El anno debe ser numerico.     ║")
                 print("║ El anno no puede ser una cadena║")
-                print("║ vacia. Fallos = ", cont, "              ║")
+                print("║ vacia. Fallos = ", cont, "               ║")
             if cont == 3:
                 fin = True
                 check = True
@@ -104,11 +121,11 @@ def validar_fecha(fecha_ini=None):
                     else:
                         cont += 1
                         print("║ El anno debe ser numerico.     ║")
-                        print("║ Fallo = ", cont, "                   ║")
+                        print("║ Fallo = ", cont, "                    ║")
                 else:
                     cont += 1
                     print("║ No introduzca cadenas vacias   ║")
-                    print("║ Fallo = ", cont, "                   ║")
+                    print("║ Fallo = ", cont, "                    ║")
                 if cont == 3:
                     fin = True
                     check = True
@@ -153,11 +170,11 @@ def validar_fecha(fecha_ini=None):
                         else:
                             cont += 1
                             print("║ El dia debe ser numerico       ║")
-                            print("║ Fallo = ", cont, "                   ║")
+                            print("║ Fallo = ", cont, "                    ║")
                     else:
                         cont += 1
                         print("║ No introduzca cadenas vacias   ║")
-                        print("║ Fallo = ", cont, "                   ║")
+                        print("║ Fallo = ", cont, "                    ║")
                 elif int(mes) == 2:
                     dia = input("║ Introduzca un dia entre 1 y 28 ║\n║ ")
                     if not (dia.isspace()):
@@ -174,11 +191,11 @@ def validar_fecha(fecha_ini=None):
                         else:
                             cont += 1
                             print("║ El dia debe ser numerico       ║")
-                            print("║ Fallo = ", cont, "                   ║")
+                            print("║ Fallo = ", cont, "                    ║")
                     else:
                         cont += 1
                         print("║ No introduzca cadenas vacias   ║")
-                        print("║ Fallo = ", cont, "                   ║")
+                        print("║ Fallo = ", cont, "                    ║")
                 if cont == 3:
                     fin = True
                     check = True
@@ -195,7 +212,7 @@ def validar_fecha(fecha_ini=None):
                         cont += 1
                         print("║ Recuerde, la fecha no puede    ║")
                         print("║ ser anterior a " + str(fecha_ini) + "    ║")
-                        print("║ Fallo = ", cont, "                   ║")
+                        print("║ Fallo = ", cont, "                    ║")
             else:
                 print("║ Ha alcanzado el máximo de      ║")
                 print("║ intentos. Saliendo del proceso.║")
@@ -234,15 +251,15 @@ def validar_kilometraje(km_ini=None):
                         cont += 1
                         print("║ El kilometrake debe ser mayor  ║")
                         print("║ que "+km_ini+"                       ║")
-                        print("║ Fallo = ", cont, "                   ║")
+                        print("║ Fallo = ", cont, "                    ║")
             else:
                 cont += 1
                 print("║ El dia kilometraje ser numerico║")
-                print("║ Fallo = ", cont, "                   ║")
+                print("║ Fallo = ", cont, "                    ║")
         else:
             cont += 1
             print("║ No introduzca cadenas vacias   ║")
-            print("║ Fallo = ", cont, "                   ║")
+            print("║ Fallo = ", cont, "                    ║")
 
     print("║ Ha alcanzado el máximo de      ║")
     print("║ intentos. Saliendo del proceso.║")
@@ -344,10 +361,10 @@ def validar_y_comprobar_matricula(root):
     cont = 0
     while cont < 3:
         print("║ Introduzca la matricula del    ║")
-        print("║ vehiculo que desea alquilar.   ║")
+        print("║ vehiculo que desea encontrar.  ║")
         mat = input("║ Recuerde AAA000: ")
         if not mat.isspace():
-            mat = mat.strip()  # El trim de python
+            mat = mat.upper().strip()  # El trim de python
             if len(mat) == 6:
                 if mat[:3].isalpha():  # Comprobamos que los valores son correcots
                     if mat[3:6].isnumeric():
