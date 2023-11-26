@@ -19,19 +19,19 @@ def validar_dni():
                     else:
                         cont += 1
                         print("║ Recuerde el formato: 00000000X ║")
-                        print("║ Fallo = " + cont + "                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
                 else:
                     cont += 1
                     print("║ Recuerde el formato: 00000000X ║")
-                    print("║ Fallo = " + cont + "                   ║")
+                    print("║ Fallo = ", cont, "                   ║")
             else:
                 cont += 1
                 print("║ Recuerde el formato: 00000000X ║")
-                print("║ Fallo = " + cont + "                   ║")
+                print("║ Fallo = ", cont, "                   ║")
         else:
             cont += 1
             print("║ No introduzca cadenas vacias   ║")
-            print("║ Fallo = " + cont + "                   ║")
+            print("║ Fallo = ", cont, "                   ║")
     if cont == 3:
         print("║ Ha alcanzado el máximo de      ║")
         print("║ intentos. Saliendo del proceso.║")
@@ -74,16 +74,16 @@ def validar_fecha(fecha_ini=None):
                         cont += 1
                         print("║ La fecha debe estar contenida  ║")
                         print("║ estar entre el anno 2000 - 2050║")
-                        print("║ Fallo = "+cont+"                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
                 else:
                     cont += 1
                     print("║ El anno debe ser numerico.     ║")
-                    print("║ Fallo = " + cont + "                   ║")
+                    print("║ Fallo = ", cont, "                   ║")
             else:
                 cont += 1
                 print("║ El anno debe ser numerico.     ║")
                 print("║ El anno no puede ser una cadena║")
-                print("║ vacia. Fallos = "+cont+"              ║")
+                print("║ vacia. Fallos = ", cont, "              ║")
             if cont == 3:
                 fin = True
                 check = True
@@ -100,15 +100,15 @@ def validar_fecha(fecha_ini=None):
                         else:
                             cont += 1
                             print("║ El mes debe estar conprendido  ║")
-                            print("║ entre 1 y 12. Fallo = "+cont+"        ║")
+                            print("║ entre 1 y 12. Fallo = ", cont, "        ║")
                     else:
                         cont += 1
                         print("║ El anno debe ser numerico.     ║")
-                        print("║ Fallo = " + cont + "                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
                 else:
                     cont += 1
                     print("║ No introduzca cadenas vacias   ║")
-                    print("║ Fallo = " + cont + "                   ║")
+                    print("║ Fallo = ", cont, "                   ║")
                 if cont == 3:
                     fin = True
                     check = True
@@ -128,15 +128,15 @@ def validar_fecha(fecha_ini=None):
                             else:
                                 cont += 1
                                 print("║ El dia debe estar comprendido  ║")
-                                print("║ entre 1 y 31. Fallos = "+cont+"       ║")
+                                print("║ entre 1 y 31. Fallos = ", cont, "       ║")
                         else:
                             cont += 1
                             print("║ El dia debe ser numerico       ║")
-                            print("║ Fallo = " + cont + "                   ║")
+                            print("║ Fallo = ", cont, "                   ║")
                     else:
                         cont += 1
                         print("║ No introduzca cadenas vacias   ║")
-                        print("║ Fallo = " + cont + "                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
                 elif int(mes) == 4 or int(mes) == 6 or int(mes) == 9 or int(mes) == 11:
                     dia = input("║ Introduzca un dia entre 1 y 30 ║\n║ ")
                     if not (dia.isspace()):
@@ -149,15 +149,15 @@ def validar_fecha(fecha_ini=None):
                             else:
                                 cont += 1
                                 print("║ El dia debe estar comprendido  ║")
-                                print("║ entre 1 y 30. Fallos = " + cont + "       ║")
+                                print("║ entre 1 y 30. Fallos = ", cont, "       ║")
                         else:
                             cont += 1
                             print("║ El dia debe ser numerico       ║")
-                            print("║ Fallo = " + cont + "                   ║")
+                            print("║ Fallo = ", cont, "                   ║")
                     else:
                         cont += 1
                         print("║ No introduzca cadenas vacias   ║")
-                        print("║ Fallo = " + cont + "                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
                 elif int(mes) == 2:
                     dia = input("║ Introduzca un dia entre 1 y 28 ║\n║ ")
                     if not (dia.isspace()):
@@ -170,15 +170,15 @@ def validar_fecha(fecha_ini=None):
                             else:
                                 cont += 1
                                 print("║ El dia debe estar comprendido  ║")
-                                print("║ entre 1 y 28. Fallos = " + cont + "       ║")
+                                print("║ entre 1 y 28. Fallos = ", cont, "       ║")
                         else:
                             cont += 1
                             print("║ El dia debe ser numerico       ║")
-                            print("║ Fallo = " + cont + "                   ║")
+                            print("║ Fallo = ", cont, "                   ║")
                     else:
                         cont += 1
                         print("║ No introduzca cadenas vacias   ║")
-                        print("║ Fallo = " + cont + "                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
                 if cont == 3:
                     fin = True
                     check = True
@@ -195,7 +195,7 @@ def validar_fecha(fecha_ini=None):
                         cont += 1
                         print("║ Recuerde, la fecha no puede    ║")
                         print("║ ser anterior a " + str(fecha_ini) + "    ║")
-                        print("║ Fallo = " + cont + "                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
             else:
                 print("║ Ha alcanzado el máximo de      ║")
                 print("║ intentos. Saliendo del proceso.║")
@@ -218,7 +218,7 @@ def validar_kilometraje(km_ini=None):
             km = input("║ ")
         else:
             print("║ Introduzca un kilometraje      ║")
-            print("║ valido, mayor que "+ km_ini+" "*(13-len(str(km_ini)))++"║")
+            print("║ valido, mayor que "+ km_ini+" "*(13-len(str(km_ini)))+"║")
             km = input("║ ")
         if len(km.strip()) > 0:
             km = km.strip()
@@ -234,15 +234,15 @@ def validar_kilometraje(km_ini=None):
                         cont += 1
                         print("║ El kilometrake debe ser mayor  ║")
                         print("║ que "+km_ini+"                       ║")
-                        print("║ Fallo = " + cont + "                   ║")
+                        print("║ Fallo = ", cont, "                   ║")
             else:
                 cont += 1
                 print("║ El dia kilometraje ser numerico║")
-                print("║ Fallo = " + cont + "                   ║")
+                print("║ Fallo = ", cont, "                   ║")
         else:
             cont += 1
             print("║ No introduzca cadenas vacias   ║")
-            print("║ Fallo = " + cont + "                   ║")
+            print("║ Fallo = ", cont, "                   ║")
 
     print("║ Ha alcanzado el máximo de      ║")
     print("║ intentos. Saliendo del proceso.║")
@@ -316,6 +316,7 @@ def validar_id(root, tipo):
     print("La obtencion del id se suspendio debido a que se fallaron demasiadas veces seguidas.")
     return None
 
+
 def matricula_esite(root, mat):
     """
     Funcion que comprueba que una matricula existe
@@ -357,23 +358,23 @@ def validar_y_comprobar_matricula(root):
                             cont += 1
                             print("║ La matricula introducida       ║")
                             print("║ no corresponde con ninguna     ║")
-                            print("║ matricula existente Fallos = ", cont+"║")
+                            print("║ matricula existente Fallos = ", cont, "║")
                     else:
                         cont += 1
                         print("║ Los tres ultimos caracteres    ║")
-                        print("║ deben ser numericos. Fallos = ", cont+"║")
+                        print("║ deben ser numericos. Fallos = ", cont, "║")
                 else:
                     cont += 1
                     print("║ Los tres ultimos caracteres    ║")
-                    print("║ deben ser alfabeticos. Fallos = ", cont + "║")
+                    print("║ deben ser alfabeticos. Fallos = ", cont, "║")
             else:
                 cont += 1
                 print("║ La matricula debe tener 6      ║")
-                print("║ caracteres. Fallos = ", cont + "         ║")
+                print("║ caracteres. Fallos = ", cont, "         ║")
         else:
             cont += 1
             print("║ No introduzca cadenas vacias   ║")
-            print("║ Fallos = ", cont+"                     ║")
+            print("║ Fallos = ", cont, "                     ║")
 
     print("║ Ha alcanzado el máximo de      ║")
     print("║ intentos. Saliendo del proceso.║")

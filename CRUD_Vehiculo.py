@@ -1,8 +1,5 @@
 import xml.etree.ElementTree as ET
-from datetime import datetime
 import os
-import random
-import string
 import Utiles
 
 
@@ -483,6 +480,7 @@ def modificar_vehiculo(root, matricula, datos):
         print("║ Error al procesar el fichero.  ║")
 
 
+''' Estructura de datos de un vehiculo.
 vehicle_data = {
     'Matricula': 'ABC123',
     'MarcaModelo': 'Esto es un test3',
@@ -490,3 +488,4 @@ vehicle_data = {
     'TarifaDia': '50.00',
     'Estado': 'Disponible'
 }
+'''

@@ -1,28 +1,26 @@
 import CRUD_Vehiculo
 import GestorAlquileres
 
-import Utiles
-
 
 def tres_opciones():
     """
     Metodo que apoya a los menus en la entrada de teclado
     :return: resultado de la seleccion del menu
     """
-    fallos=0
+    fallos = 0
     while True:
         print("╔════════════════════════════════╗")
         print("║Seleccione para continuar       ║")
         respuesta = input("║ Opcion:")
         if respuesta == "0":
             return "0"
-        elif respuesta  == '1':
+        elif respuesta == '1':
             return "1"
         elif respuesta == '2':
             return "2"
         else:
             fallos += 1
-            if fallos >=5:
+            if fallos >= 5:
                 print("║ LLevas "+str(fallos)+" fallos, consecutivos"+" "*(2-len(str(fallos)))+" ║")
                 print("║ Introduzca una opcion valida   ║")
                 print("║            POR FAVOR           ║")
@@ -38,12 +36,12 @@ def cinco_opciones(cadena):
     Metodo que apoya a los menus en la entrada de teclado
     :return: resultado de la seleccion del menu
     """
-    fallos=0
+    fallos = 0
     while True:
         respuesta = input(cadena)
         if respuesta == "0":
             return "0"
-        elif respuesta  == '1':
+        elif respuesta == '1':
             return "1"
         elif respuesta == '2':
             return "2"
@@ -52,7 +50,7 @@ def cinco_opciones(cadena):
         elif respuesta == '4':
             return "4"
         else:
-            if fallos==3:
+            if fallos == 3:
                 return 0
             else:
                 print("║  Introduzca una opcion valida:")
@@ -64,7 +62,7 @@ def seis_opciones(cadena):
     Metodo que apoya a los menus en la entrada de teclado
     :return: resultado de la seleccion del menu
     """
-    fallos=0
+    fallos = 0
     while True:
         if cadena is not None:
             respuesta = input(cadena)
@@ -72,7 +70,7 @@ def seis_opciones(cadena):
             respuesta = input()
         if respuesta == "0":
             return "0"
-        elif respuesta  == '1':
+        elif respuesta == '1':
             return "1"
         elif respuesta == '2':
             return "2"
@@ -83,7 +81,7 @@ def seis_opciones(cadena):
         elif respuesta == '5':
             return "5"
         else:
-            if fallos==3:
+            if fallos == 3:
                 return 0
             else:
                 print("║  Introduzca una opcion valida:")
@@ -123,7 +121,6 @@ def mostrar_nuevo_vehicle(vehicle):
     """
     Metodo que muestra en estilo los datos de un vehiculo
     """
-
     print("║         Nuevo Vehiculo         ║")
     print("╠════════════════════════════════╣")
     print("║ Matricula: "+vehicle['Matricula']+"              ║")
@@ -131,8 +128,6 @@ def mostrar_nuevo_vehicle(vehicle):
     print("║ Fecha fabricacion: "+str(vehicle['AnnoFabricacion'])+"        ║")
     print("║ Tarifa: "+str(vehicle['TarifaDia'])+" "*(23-len(str(vehicle['TarifaDia'])))+"║")
     print("║              ----              ║")
-
-
 
 
 def mostar_menu_alquileres():
@@ -187,7 +182,7 @@ def menu_modificar_vehiculo(root):
     """
     Metodo que se encarga de pedir los necesarios para la modificacion de un vehiculo, tras ello encio estos a CRUD_Vehiculo.modificar_vehiculo
     """
-    errores=0
+    errores = 0
     renuncia = False
     while not renuncia:
         fallos = 0
@@ -198,8 +193,8 @@ def menu_modificar_vehiculo(root):
             print("║ Introduzca la matricula del    ║")
             print("║ vehiculo que desea modificar   ║")
             pregunta = input("║ Matricula, formato AAA000: ")
-            if CRUD_Vehiculo.matricula_en_uso(pregunta, root): #esta
-                vehicle=CRUD_Vehiculo.obtener_vehiculo(pregunta)
+            if CRUD_Vehiculo.matricula_en_uso(pregunta, root):  #esta
+                vehicle = CRUD_Vehiculo.obtener_vehiculo(pregunta)
 
                 if vehicle is not None:
                     modificacion = seis_opciones("║ 1. Modificar Matricula         ║\n"

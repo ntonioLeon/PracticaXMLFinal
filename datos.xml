@@ -2,50 +2,46 @@
 <Renting>
     <Vehiculos>
         <Vehiculo idVehiculo="1">
-            <Matricula>zzz111</Matricula>
+            <Matricula>aaa111</Matricula>
             <MarcaModelo>a a</MarcaModelo>
             <AnnoFabricacion>2000</AnnoFabricacion>
             <TarifaDia>50.00</TarifaDia>
-            <Estado>Alquilado</Estado>
+            <Estado>Disponible</Estado>
         </Vehiculo>
         <Vehiculo idVehiculo="2">
             <Matricula>bbb222</Matricula>
             <MarcaModelo>b b</MarcaModelo>
             <AnnoFabricacion>2000</AnnoFabricacion>
-            <TarifaDia>50.00</TarifaDia>
+            <TarifaDia>75.00</TarifaDia>
             <Estado>Alquilado</Estado>
+        </Vehiculo>
+        <Vehiculo idVehiculo="3">
+            <Matricula>ccc333</Matricula>
+            <MarcaModelo>c c</MarcaModelo>
+            <AnnoFabricacion>2000</AnnoFabricacion>
+            <TarifaDia>100.00</TarifaDia>
+            <Estado>Disponible</Estado>
         </Vehiculo>
     </Vehiculos>
     <Alquileres>
         <Alquiler idAlquiler="1">
-            <idVehiculo Matricula="zzz111">1</idVehiculo>
-            <dniCliente>12312312A</dniCliente>
+            <idVehiculo Matricula="aaa111">1</idVehiculo>
+            <dniCliente>00000000X</dniCliente>
             <FechaIniAlq>2000-01-01</FechaIniAlq>
-            <FechaFinAlq>2000-01-02</FechaFinAlq>
-            <FechaDevolucion>2000-01-03</FechaDevolucion>
+            <FechaFinAlq>2000-01-03</FechaFinAlq>
+            <FechaDevolucion>2000-01-05</FechaDevolucion>
             <KmInicial>1</KmInicial>
             <KmFinal>2</KmFinal>
-            <PrecioFinal>80.0</PrecioFinal>
-            <Recargo>30</Recargo>
+            <PrecioFinal>260.0</PrecioFinal>
+            <Recargo>60</Recargo>
         </Alquiler>
-        <Alquiler idAlquiler="2">
-            <idVehiculo Matricula="zzz111">1</idVehiculo>
-            <dniCliente>32132132A</dniCliente>
-            <FechaIniAlq>2000-01-06</FechaIniAlq>
-            <FechaFinAlq>2000-01-07</FechaFinAlq>
+    <Alquiler idAlquiler="2">
+            <idVehiculo Matricula="bbb222">2</idVehiculo>
+            <dniCliente>11111111a</dniCliente>
+            <FechaIniAlq>2000-01-01</FechaIniAlq>
+            <FechaFinAlq>2000-01-05</FechaFinAlq>
             <FechaDevolucion></FechaDevolucion>
-            <KmInicial>12</KmInicial>
-            <KmFinal></KmFinal>
-            <PrecioFinal></PrecioFinal>
-            <Recargo></Recargo>
-        </Alquiler>
-    <Alquiler idAlquiler="3">
-            <idVehiculo Matricula="zzz111">1</idVehiculo>
-            <dniCliente>55555555d</dniCliente>
-            <FechaIniAlq>2005-02-05</FechaIniAlq>
-            <FechaFinAlq>2006-05-31</FechaFinAlq>
-            <FechaDevolucion></FechaDevolucion>
-            <KmInicial>155</KmInicial>
+            <KmInicial>1</KmInicial>
             <KmFinal></KmFinal>
             <PrecioFinal></PrecioFinal>
             <Recargo></Recargo>
