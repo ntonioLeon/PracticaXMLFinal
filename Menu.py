@@ -218,11 +218,11 @@ def menu_modificar_vehiculo(root):
                             matricula = input("║ Matricula, formato AAA000: ")
                             if matricula is not None and not CRUD_Vehiculo.matricula_en_uso(matricula, root) and CRUD_Vehiculo.verificar_matricula(matricula):
                                 print("║ Matricula introducida con exito║")
-                                vehiculo = {'Matricula': matricula, 'MarcaModelo': vehicle['MarcaModelo'], 'AnnoFabricacion': vehicle['AnnoFabricacion'],
+                                vehiculo = {'Matricula': matricula.upper(), 'MarcaModelo': vehicle['MarcaModelo'], 'AnnoFabricacion': vehicle['AnnoFabricacion'],
                                            'TarifaDia': vehicle['TarifaDia'], 'Estado': vehicle['Estado']}
                                 mostrar_nuevo_vehicle(vehiculo)
                                 if si_no("║ Desea modificar vehiculo       ║\n║ con estas caracteristicas?     ║"):
-                                    CRUD_Vehiculo.modificar_vehiculo(root, pregunta, vehiculo)
+                                    CRUD_Vehiculo.modificar_vehiculo(root, pregunta.upper(), vehiculo)
                                     print("║ Coche modificado.              ║")
                                     print("╚════════════════════════════════╝")
                                     exito = True
@@ -519,7 +519,7 @@ def menu_alta_vehiculo(root):
                 fallos = 0
                 retorno = False
 
-                vehicle = {'Matricula': matricula, 'MarcaModelo': marca+" "+modelo, 'AnnoFabricacion': anno, 'TarifaDia': tarifa,
+                vehicle = {'Matricula': matricula.upper(), 'MarcaModelo': marca+" "+modelo, 'AnnoFabricacion': anno, 'TarifaDia': tarifa,
                            'Estado': 'Disponible'}
                 mostrar_nuevo_vehicle(vehicle)
                 if si_no("║ Desea agregar un nuevo vehiculo║\n║ con estas caracteristicas?     ║"):
@@ -567,7 +567,6 @@ def menu_buscar_vehiculo(root):
                     if si_no("║ ¿Desea buscar un otro vehiculo?║"):
                         print("║ Volviendo al Menu Busqueda     ║")
                         print("╚════════════════════════════════╝")
-                        retono = False
                     else:
                         print("║ Volviendo al Menu Vehiculo     ║")
                         print("╚════════════════════════════════╝")
@@ -593,6 +592,7 @@ def menu_buscar_vehiculo(root):
         else:
             renuncia = True
 
+
 def menu_eliminar_vehiculo(root):
     """
     Metodo que se encarga de pedir los datos necesarios para realizar una baja, tras ello envia los datos a CRUD_Vehiculo.eliminar_vehiculo() y muestra los datos
@@ -612,22 +612,29 @@ def menu_eliminar_vehiculo(root):
                 vehicle = CRUD_Vehiculo.obtener_vehiculo(pregunta)
                 if vehicle is not None:
                     mostrar_nuevo_vehicle(vehicle)
-                    if si_no("║Desea dar de baja este vehiculo?║"):
-                        CRUD_Vehiculo.eliminar_vehiculo(root, vehicle['idVehiculo'])
+                    if vehicle["Estado"] == "Disponible":
+                        if si_no("║Desea dar de baja este vehiculo?║"):
+                            CRUD_Vehiculo.eliminar_vehiculo(root, vehicle['idVehiculo'])
+                        else:
+                            print("║ Baja cancelada                 ║")
+                            print("║ Volviendo al Menu Busqueda     ║")
+                            print("╠════════════════════════════════╣")
+                        if si_no("║ ¿Desea borrar un otro vehiculo?║"):
+                            print("║ Volviendo al Menu Busqueda     ║")
+                            print("╚════════════════════════════════╝")
+                            renuncia = False
+                        else:
+                            print("║ Volviendo al Menu Vehiculo     ║")
+                            print("╚════════════════════════════════╝")
+                            renuncia = True
                     else:
-                        print("║ Baja cancelada                 ║")
-                        print("║ Volviendo al Menu Busqueda     ║")
-                        print("╠════════════════════════════════╣")
-                    if si_no("║ ¿Desea buscar un otro vehiculo?║"):
-                        print("║ Volviendo al Menu Busqueda     ║")
+                        print("║ Fallo, vehiculo en alquiler    ║")
+                        print("║ Saliendo del menu              ║")
                         print("╚════════════════════════════════╝")
-                        retono = False
-                    else:
-                        print("║ Volviendo al Menu Vehiculo     ║")
-                        print("╚════════════════════════════════╝")
+                        renuncia = True
                 else:
                     print("║ Fallo al encontrar Vehiculo    ║")
-                    print("║ Slaiendo del menu              ║")
+                    print("║ Saliendo del menu              ║")
                     renuncia = True
             else:
                 if errores == 2:

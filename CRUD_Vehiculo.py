@@ -72,7 +72,6 @@ def crear_vehiculo(vehiculo, root):
     """
     tree = ET.ElementTree(root)
     id = obtener_ultimo_id()
-
     coche = ET.Element('Vehiculo', {'idVehiculo': str(id)})
 
     for key, value in vehiculo.items():
@@ -144,12 +143,12 @@ def obtener_vehiculo(matricula):
 
         if vehiculos is not None:
             for vehiculo in vehiculos.findall('Vehiculo'):
-                if vehiculo.find('Matricula').text == matricula:
+                if vehiculo.find('Matricula').text == matricula.upper():
                     vehiculo_dic = {'idVehiculo': vehiculo.get('idVehiculo')}
                     for element in vehiculo:
                         vehiculo_dic[element.tag] = element.text
                     return vehiculo_dic
-        print(f"║No se encontró ningún vehículo  ║\n║con la matrícula: {matricula}║")
+        print(f"║No se encontró ningún vehículo  ║\n║con la matrícula: {matricula.upper()}║")
         return None
 
     except Exception as e:
@@ -225,7 +224,7 @@ def matricula_en_uso(matricula, root):
         vehiculos = tree.find('.//Vehiculos')
         if vehiculos is not None:
             for vehiculo in vehiculos.findall('.//Vehiculo/Matricula'):
-                if vehiculo.text == matricula:
+                if vehiculo.text == matricula.upper():
                     return True
         return False
     except Exception as e:
@@ -473,7 +472,7 @@ def modificar_vehiculo(root, matricula, datos):
         prettify(root)
 
         tree.write(Utiles.path())
-        print("║"f"Vehículo con matrícula {matricula}" + " " * (30 - len({matricula})) + "║")
+        print("║"f"Vehículo con matrícula {matricula}" + " " * (25 - len("Vehículo con matrícula ")+len({matricula})) + "║")
         print("║ modificado correctamente.      ║")
         print("║              ----              ║")
     except Exception as e:
