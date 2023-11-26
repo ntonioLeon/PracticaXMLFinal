@@ -91,6 +91,9 @@ def seis_opciones(cadena):
 
 
 def fails(fallos, modificacion):
+    """
+    metodo que apoya a los menus y muestra el numero de fallos
+    """
     fallos += 1
     print("║ "+str(fallos)+"/3 fallos hasta salir del " + modificacion)
     return fallos
@@ -117,6 +120,9 @@ def si_no(cadena):
 
 
 def mostrar_nuevo_vehicle(vehicle):
+    """
+    Metodo que muestra en estilo los datos de un vehiculo
+    """
 
     print("║         Nuevo Vehiculo         ║")
     print("╠════════════════════════════════╣")
@@ -130,6 +136,9 @@ def mostrar_nuevo_vehicle(vehicle):
 
 
 def mostar_menu_alquileres():
+    """
+    Metodo que muestra en estilo las opciones del menu alquileres
+    """
     print("╔════════════════════════════════╗")
     print("║   Menu Gestion de Alquileres   ║")
     print("╠════════════════════════════════╣")
@@ -144,6 +153,9 @@ def mostar_menu_alquileres():
 
 
 def mostar_menu_vehiculo():
+    """
+    Metodo que muestra en estilo las opciones del menu vehiculos
+    """
     print("╔════════════════════════════════╗")
     print("║   Menu Gestion de Vehículos    ║")
     print("╠════════════════════════════════╣")
@@ -158,6 +170,9 @@ def mostar_menu_vehiculo():
 
 
 def mostar_menu_principal():
+    """
+    Metodo que muestra en estilo las opciones del menu principal
+    """
     print("╔════════════════════════════════╗")
     print("║    Menu Gestion de Renting     ║")
     print("╠════════════════════════════════╣")
@@ -169,6 +184,9 @@ def mostar_menu_principal():
 
 
 def menu_modificar_vehiculo(root):
+    """
+    Metodo que se encarga de pedir los necesarios para la modificacion de un vehiculo, tras ello encio estos a CRUD_Vehiculo.modificar_vehiculo
+    """
     errores=0
     renuncia = False
     while not renuncia:
@@ -383,6 +401,9 @@ def menu_modificar_vehiculo(root):
 
 
 def menu_alta_vehiculo(root):
+    """
+    Metodo que se encarga de pedir los necesarios para el alta de un vehiculo, tras ello encio estos a CRUD_Vehiculo.crear_vehiculo
+    """
     renuncia = False
     while not renuncia:
         fallos = 0
@@ -528,6 +549,9 @@ def menu_alta_vehiculo(root):
 
 
 def menu_buscar_vehiculo(root):
+    """
+    Metodo que se encarga de pedir los datos necesarios para realizar una busqueda, tras ello envia los datos a CRUD_Vehiculo.obtener_vehiculo() y muestra los datos
+    """
     errores = 0
     renuncia = False
     while not renuncia:
@@ -575,6 +599,9 @@ def menu_buscar_vehiculo(root):
             renuncia = True
 
 def menu_eliminar_vehiculo(root):
+    """
+    Metodo que se encarga de pedir los datos necesarios para realizar una baja, tras ello envia los datos a CRUD_Vehiculo.eliminar_vehiculo() y muestra los datos
+    """
     errores = 0
     renuncia = False
     while not renuncia:
@@ -625,6 +652,9 @@ def menu_eliminar_vehiculo(root):
             renuncia = True
 
 def menu_mostrar_vehiculo(root):
+    """
+    Metodo encargado de mostrar todos los vehiculos desde CRUD_Vehiculo.mostrar_todos(root)
+    """
     print("╔════════════════════════════════╗")
     print("║      Menu Mostrar Vehículos    ║")
     print("╠════════════════════════════════╣")
@@ -748,7 +778,7 @@ def menu_principal(root):
 
 def menu_basico():
     """
-    sMenu basico llamado desde el CRUD_Vehiculo que te manda a los diferentes submenus de vehiculos y alquileres.
+    Menu basico llamado desde el CRUD_Vehiculo que te manda a los diferentes submenus de vehiculos y alquileres.
     """
     tree = CRUD_Vehiculo.cargar_arbol_xml()
     root = tree.getroot()
@@ -767,16 +797,3 @@ def menu_basico():
             print("Saliendo del programa. Hasta luego!")
         else:
             print("Opción no valida.")
-
-
-
-#root = CRUD_Vehiculo.cargar_arbol_xml()
-#GestorAlquileres.finalizar_alquiler(root)
-#GestorAlquileres.modificar_alquiler(root)
-#menu_alta_vehiculo(root)
-#menu_modificar_vehiculo(root)
-#menu_buscar_vehiculo(root)
-#menu_eliminar_vehiculo(root)
-#menu_mostrar_vehiculo(root)
-#GestorAlquileres.crear_alquiler(root)
-#menu_principal(root)

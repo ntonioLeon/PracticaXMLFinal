@@ -7,6 +7,9 @@ import Utiles
 
 
 def cargar_arbol_xml():
+    """
+    metodo que se encarga de cargar el de cargar el fichero XML
+    """
     if not os.path.exists(Utiles.path()):
         root = ET.Element('Renting')
         vehiculos = ET.SubElement(root, 'Vehiculos')
@@ -29,6 +32,9 @@ def cargar_arbol_xml():
 
 
 def prettify(elem, level=0):
+    """
+    prettify, encargado de reorganizar el fichero XML
+    """
     indent = "    "  # 4 espacios por nivel
     i = "\n" + level * indent
     if len(elem):
@@ -46,6 +52,9 @@ def prettify(elem, level=0):
 
 
 def obtener_ultimo_id():
+    """
+    metodo que retona el ultimo id+1 para crear un nuevo vehiculo y asignarle un id valido
+    """
     tree = ET.parse(Utiles.path())
     root = tree.getroot()
 
@@ -60,6 +69,10 @@ def obtener_ultimo_id():
 
 
 def crear_vehiculo(vehiculo, root):
+    """
+    Metodo encargado de crear un nuevo vehiculo
+    @:param  root y los datos necesarios para crear un vehiculo
+    """
     tree = ET.ElementTree(root)
     id = obtener_ultimo_id()
 
@@ -80,6 +93,10 @@ def crear_vehiculo(vehiculo, root):
 
 
 def check_status(root):
+    """
+    Metodo encargado de verificar si existen vehiculos en el fichero XML
+    @:param root
+    """
     vehiculos = root.find('Vehiculos')
 
     if vehiculos is not None and vehiculos.findall('Vehiculo'):
@@ -92,6 +109,10 @@ def check_status(root):
 
 
 def mostrar_todos(root):
+    """
+    Metodo encargado de imprimir por pantalla los vehiculos en el fichero XML
+    @:param root
+    """
     vehiculos = root.find('Vehiculos')
 
     if vehiculos is not None and vehiculos.findall('Vehiculo'):
@@ -113,6 +134,11 @@ def mostrar_todos(root):
 
 
 def obtener_vehiculo(matricula):
+    """
+    Metodo encargado de devolver los datos de un vehiculo en el XML
+    @:param matricula
+    return: datos del vehiculo
+    """
     try:
         tree = ET.parse(Utiles.path())
         root = tree.getroot()
@@ -126,8 +152,7 @@ def obtener_vehiculo(matricula):
                     for element in vehiculo:
                         vehiculo_dic[element.tag] = element.text
                     return vehiculo_dic
-
-        print(f"No se encontró ningún vehículo con la matrícula: {matricula}")
+        print(f"║No se encontró ningún vehículo  ║\n║con la matrícula: {matricula}║")
         return None
 
     except Exception as e:
@@ -136,6 +161,9 @@ def obtener_vehiculo(matricula):
 
 
 def buscar_vehiculo(matricula):
+    """
+    Permite buscar vehiculos en el XML por matricula
+    """
     tree = ET.parse(Utiles.path())
     root = tree.getroot()
 
@@ -149,11 +177,16 @@ def buscar_vehiculo(matricula):
                     print(
                         f"{element.tag}: {element.text}")  # f es como el printf en java es mas felxible para imprimir expresiones
                 return True
-    print(f"No se encontró ningún vehículo con la matrícula: {matricula}")
+    print(f"║No se encontró ningún vehículo  ║\n║con la matrícula: {matricula}║")
     return False
 
 
 def obtener_id_por_matricula(matricula):
+    """
+    Devuelve el id de un vehiculo a partir de la matricula de este
+    @:param matricula
+    return: id vehiculo
+    """
     tree = ET.parse(Utiles.path())
     root = tree.getroot()
 
@@ -166,6 +199,12 @@ def obtener_id_por_matricula(matricula):
 
 
 def verificar_matricula(cadena):
+    """
+    verifica si el formato introducido es el de una matricula: AAA000
+    @:param cadena
+    return: true= lo cumple
+    return: false= no lo cumple
+    """
     if len(cadena) == 6:
         letras = cadena[:3]
         numeros = cadena[3:]
@@ -178,6 +217,12 @@ def verificar_matricula(cadena):
 
 
 def matricula_en_uso(matricula, root):
+    """
+    Verifica si la matricula introducida esta ya registrada
+    @:param matricula y root
+    return: true= ya esta registrada
+    return: false= no esta registrada
+    """
     try:
         tree = ET.ElementTree(root)
         vehiculos = tree.find('.//Vehiculos')
@@ -192,6 +237,10 @@ def matricula_en_uso(matricula, root):
 
 
 def entrada_teclado(campo):
+    """
+    verifica que la entrada de teclado no es null
+    @:param campo
+    """
     contador = 0
     while True:
         entrada = input("Introduce una  " + campo + ": ")
@@ -205,12 +254,23 @@ def entrada_teclado(campo):
 
 
 def fails(fallos, modificacion):
+    """
+    Metodo de apoyo para verificacion de datos
+    @:param fallos(int), modificacion(str)= datos para la informacion
+    return: numero de fallos
+    """
     fallos += 1
     print(str(fallos) + "/3 fallos hasta salir del " + modificacion)
     return fallos
 
 
 def isdecima(num):
+    """
+    verifica si un numero es decimal, si es un int lo combierte a float
+    @:param num(int), num(float), num(str)
+    return: num(float)
+    return: None
+    """
     try:
         numero = int(num)
         if 50 <= numero <= 250:
@@ -225,6 +285,10 @@ def isdecima(num):
 
 
 def alta_datos(root):
+    """
+    Metodo legado de alta vehiculos realmete no se usa
+    @:param root
+    """
     renuncia = False
     fallos = 0
     while not renuncia:
@@ -426,199 +490,3 @@ vehicle_data = {
     'TarifaDia': '50.00',
     'Estado': 'Disponible'
 }
-
-root = cargar_arbol_xml()
-tree = ET.ElementTree(root)
-# alta_datos(root)
-# eliminar_vehiculo(root, obtener_id_por_matricula("SHN034"))
-# modificar_vehiculo(root, "ABC665", vehicle_data)
-"""
-if(vehi is not None):
-
-    buscar_vehiculo(vehi['Matricula'])
-    print(obtener_id_por_matricula(vehi['Matricula']))
-"""
-# mostrar_todos()
-
-"""
-def generar_coche(root):
-    tree = ET.ElementTree(root)
-    matricula = None
-    marca = None
-    fin = False
-    while not fin:
-        matricula = ''.join(random.choice(string.ascii_uppercase) for letras in range(3)) + ''.join(
-            random.choice(string.digits) for numeros in range(3))
-        if not matricula_en_uso(matricula, tree):
-            fin = True
-
-    aleatorio = random.randint(0, 10)
-    if (aleatorio == 0):
-        marca = "Mitsubishi"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " Pajero"
-        elif (modelo == 1):
-            marca += " EVO Lancer 7"
-        elif (modelo == 2):
-            marca += " Eclipse"
-        elif (modelo == 3):
-            marca += " Outlander"
-        elif (modelo == 4):
-            marca += " ASX"
-        elif (modelo == 5):
-            marca += " EVO Lancer X"
-    elif (aleatorio == 1):
-        marca = "Toyota"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " Prius"
-        elif (modelo == 1):
-            marca += " Corolla"
-        elif (modelo == 2):
-            marca += " AE86"
-        elif (modelo == 3):
-            marca += " LEVI"
-        elif (modelo == 4):
-            marca += " RAV4"
-        elif (modelo == 5):
-            marca += " Tacoma"
-    elif (aleatorio == 2):
-        marca = "Honda"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " Civic"
-        elif (modelo == 1):
-            marca += " CR-V"
-        elif (modelo == 2):
-            marca += " Odyssey"
-        elif (modelo == 3):
-            marca += " Pilot"
-        elif (modelo == 4):
-            marca += " HR-V"
-        elif (modelo == 5):
-            marca += " Accord"
-    elif (aleatorio == 3):
-        marca = "Nissan"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " Altima"
-        elif (modelo == 1):
-            marca += " Rogue"
-        elif (modelo == 2):
-            marca += " Sentra"
-        elif (modelo == 3):
-            marca += " Murano"
-        elif (modelo == 4):
-            marca += " Maxima"
-        elif (modelo == 5):
-            marca += " Armada"
-    elif (aleatorio == 4):
-        marca = "Subaru"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " Outback"
-        elif (modelo == 1):
-            marca += " Impreza"
-        elif (modelo == 2):
-            marca += " WRX"
-        elif (modelo == 3):
-            marca += " Forester"
-        elif (modelo == 4):
-            marca += " BRZ"
-        elif (modelo == 5):
-            marca += " XV"
-    elif (aleatorio == 5):
-        marca = "Mazda"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " 3"
-        elif (modelo == 1):
-            marca += " 6"
-        elif (modelo == 2):
-            marca += " MX-5 Miata"
-        elif (modelo == 3):
-            marca += " RX-8"
-        elif (modelo == 4):
-            marca += " CX-30"
-        elif (modelo == 5):
-            marca += " CX-5"
-    elif (aleatorio == 6):
-        marca = "Suzuki"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " Swift"
-        elif (modelo == 1):
-            marca += " Jimny"
-        elif (modelo == 2):
-            marca += " Vitara"
-        elif (modelo == 3):
-            marca += " Baleno"
-        elif (modelo == 4):
-            marca += " Ignis"
-        elif (modelo == 5):
-            marca += " S-Cross"
-    elif (aleatorio == 7):
-        marca = "Lexus"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " RX"
-        elif (modelo == 1):
-            marca += " EX"
-        elif (modelo == 2):
-            marca += " IS"
-        elif (modelo == 3):
-            marca += " NX"
-        elif (modelo == 4):
-            marca += " LX"
-        elif (modelo == 5):
-            marca += " LC"
-    elif (aleatorio == 8):
-        marca = "Acura"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " MDX"
-        elif (modelo == 1):
-            marca += " RDX"
-        elif (modelo == 2):
-            marca += " TLX"
-        elif (modelo == 3):
-            marca += " ILX"
-        elif (modelo == 4):
-            marca += " NSX"
-        elif (modelo == 5):
-            marca += " RSX"
-    elif (aleatorio == 9):
-        marca = "Infiniti"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " Q50"
-        elif (modelo == 1):
-            marca += " Q60"
-        elif (modelo == 2):
-            marca += " QX50"
-        elif (modelo == 3):
-            marca += " QX60"
-        elif (modelo == 4):
-            marca += " QX80"
-        elif (modelo == 5):
-            marca += " QX70"
-    elif (aleatorio == 10):
-        marca = "Isuzu"
-        modelo = random.randint(0, 5)
-        if (modelo == 0):
-            marca += " D-MAX"
-        elif (modelo == 1):
-            marca += " MU-X"
-        elif (modelo == 2):
-            marca += " Trooper"
-        elif (modelo == 3):
-            marca += " Axiom"
-        elif (modelo == 4):
-            marca += " VehiCROSS"
-        elif (modelo == 5):
-            marca += " Gemini"
-    anno = random.randint(1975, datetime.now().year)
-    tarifa = round(random.uniform(50.00, 150.00), 2)
-    return {'Matricula': matricula, 'MarcaModelo': marca, 'AnnoFabricacion': anno, 'TarifaDia': tarifa,
-            'Estado': 'Disponible'}"""
