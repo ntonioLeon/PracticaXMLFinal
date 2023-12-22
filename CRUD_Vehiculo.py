@@ -466,7 +466,10 @@ def modificar_vehiculo(root, matricula, datos):
                     nuevo.text = str(value)
                     vehiculo.append(nuevo)
         tree.write(Utiles.path())
-        for alquiler in root.findall(".//Alquiler[idVehiculo='" + id_nue + "']"):
+        #for alquiler in root.findall(root.find(".//idVehiculo").get("Matricula")==matricula):
+        for alquiler in root.findall(".//Alquiler[0].get('Matricula')="+matricula+""):
+        #for alquiler in root.findall(".//Alquiler[idVehiculo@Matricula='" + id_nue + "']"):
+        #for alquiler in root.findall(".//Alquiler[idVehiculo='" + id_nue + "']"):
             alquiler[0].attrib["Matricula"] = str(datos["Matricula"])
 
         prettify(root)
